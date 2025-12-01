@@ -1,0 +1,48 @@
+import streamlit as st
+import pandas as pd
+import matplotlib as plt 
+
+
+st.title("Streamlit app of vgu")
+st.text("Welcome to your streamlit dashboard")
+st.header("I am a header")
+st.write("You can write",10+5)
+
+st.sidebar.title("Student Panel")
+st.sidebar.text_input("Sidebar Name")
+st.sidebar.selectbox("Choose Stream", ["BCA","B.Tech","MCA"])
+
+name = st.text_input("Enter your name :")
+age = st.number_input("Enter your age :")
+
+st.write("Your name is :", name, "Your age is", age)
+
+st.selectbox("Enter your course:", ["BCA", "B.TECH", "MCA"])
+
+if st.button("click me"):
+    st.success("CLicked button")
+
+file = st.file_uploader("upload your file")
+if file:
+    content = file.read()
+    st.write("file uploaded successfully")
+
+with st.expander("More Details"):
+    st.write("This is extra expandable content!")
+    st.write("You typed name:", name)
+
+data = {"name": ["tom", "jack", "pop"], "marks": [10, 20, 30]}
+df = pd.DataFrame(data)
+st.dataframe(df)
+
+level = st.select_slider("Select Level", ["Low", "Medium", "High"])
+st.write("Your level:", level)
+
+st.download_button(
+    label="Download Your Data",
+    data=f"Name: {name}\nAge: {age}\nLevel: {level}",
+    file_name="userdata.txt"
+)
+
+chart_data = pd.DataFrame({"marks": [12, 33, 54, 6]})
+st.bar_chart(chart_data)
